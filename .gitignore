@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+.env
+
+# Fly.io specific (if any, not usually needed for static Docker deploys like this)
+# fly.toml # Generally, you DO want to commit fly.toml
+
+# IDE/Editor specific (examples)
+.vscode/
+.idea/ 

@@ -1,0 +1,574 @@
+:root {
+  --gradient-background-start: rgb(255, 111, 0);
+  --gradient-background-end: rgb(0, 45, 226);
+  --first-color: 18, 113, 255;
+  --second-color: 221, 74, 255;
+  --third-color: 100, 220, 255;
+  --size: 80%;
+  --blending-value: hard-light;
+}
+
+@keyframes flowBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes flowBackgroundReverse {
+  0% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Inter', sans-serif; /* Base font */
+  overflow-x: hidden; /* Prevent horizontal scroll, allow vertical */
+  overflow-y: auto;   /* Enable vertical scrolling */
+  color: white; /* Default text color for content on dark background */
+}
+
+/* More specific global font application */
+body, h1, h2, h3, h4, h5, h6, p, a, li, button, input, textarea, select {
+  font-family: 'Inter', sans-serif;
+}
+
+.hero-section-container { /* Renamed class */
+  min-height: 100vh; /* Use min-height to ensure it covers viewport, but can be scrolled past */
+  width: 100vw;
+  position: relative; /* Keep relative for z-indexing of overlay */
+  /* overflow: hidden; // Removed to allow content below to show */
+  top: 0;
+  left: 0;
+  background-image: url('assets/bggradient.jpg'); 
+  background-size: 150% 150%; /* Make background larger than container */
+  background-position: center; 
+  background-repeat: no-repeat; 
+  animation: flowBackground 40s ease-in-out infinite; /* Apply animation */
+  display: flex; /* For centering hero content */
+  align-items: center; /* For centering hero content */
+  justify-content: center; /* For centering hero content */
+}
+
+/* Overlay for fading to white */
+.hero-section-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 22%; /* Adjust height of the fade area */
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+  pointer-events: none; /* Ensure overlay doesn't intercept mouse events */
+}
+
+/* Hero content styles */
+.hero-content-area {
+  position: relative; /* Changed from absolute as parent is now flex centering */
+  /* top: 15vh; // No longer needed due to flex centering */
+  /* left: 50%; // No longer needed */
+  /* transform: translateX(-50%); // No longer needed */
+  z-index: 1; /* Ensure it's above the background image but below potential future elements */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 90%; /* Max width for content */
+  max-width: 700px; /* Specific max width */
+}
+
+.hero-text-box {
+  background-color: rgba(30, 30, 50, 0.25); /* Subtle dark glassy background */
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%); /* For Safari */
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.hero-text-box h1 {
+  font-size: 3.2em;
+  margin-top: 0;
+  margin-bottom: 0.3em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #f0f0f5;
+}
+
+.hero-text-box h2 {
+  font-size: 1.6em;
+  font-weight: 400;
+  margin-bottom: 0;
+  color: #d0d0e0;
+  line-height: 1.5;
+}
+
+/* Learn More Button Styles */
+.learn-more-btn {
+  color: white;
+  padding: 12px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.1em;
+  font-weight: 500;
+  margin-top: 30px;
+  cursor: pointer;
+  border-radius: 16px; /* Pill shape */
+  transition: filter 0.3s ease-out, transform 0.2s ease;
+
+  border: 2px solid transparent; /* Sets border thickness, transparent base */
+  background-image:
+    linear-gradient(rgba(30, 30, 50, 0.25), rgba(30, 30, 50, 0.25)), /* Inner background, matches hero-text-box */
+    linear-gradient(to right, #7F5CE4, #F85F2B); /* Border gradient */
+  background-origin: border-box;
+  background-clip: padding-box, border-box; /* Crucial for layering */
+}
+
+.learn-more-btn:hover {
+  transform: scale(1.05);
+}
+
+.learn-more-btn.blurred {
+  filter: blur(3px);
+  pointer-events: none; /* Prevent further clicks when blurred */
+}
+
+/* Section Title Styles (for above cards) */
+.section-title-container {
+  text-align: center; /* Center the h1 within this div */
+  padding: 40px 20px 20px 20px; /* Add some space around it, less at bottom before cards */
+  background-color: #ffffff; /* Ensure it's on the white background */
+}
+
+.section-title {
+  color: #111827; /* Black/very dark gray text */
+  font-size: 2.5em; /* Adjust size as needed */
+  font-weight: 600;
+  margin: 0; /* Remove default h1 margin if container handles padding */
+}
+
+/* Cards Section Styles */
+.cards-section {
+  background-color: #ffffff; /* White background for this section */
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column; /* Stack cards vertically */
+  align-items: center;    /* Center cards horizontally in the column */
+  /* flex-wrap: wrap; // No longer needed for a single column */
+  /* justify-content: center; // align-items handles horizontal centering for column flex */
+  gap: 160px; /* Increased space between cards */
+}
+
+.info-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 750px; /* Increased max-width of a card */
+  overflow: hidden; /* Ensure content respects border radius */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-image {
+  width: 100%;
+  height: 250px; /* Fixed height for the image area */
+  object-fit: cover; /* Cover the area, might crop */
+  background-color: #e0e0e0; /* Placeholder color if image doesn't load */
+}
+
+.card-text-content {
+  padding: 25px;
+  text-align: left;
+}
+
+.card-text-content h1 {
+  color: #111827; /* Dark gray for H1 */
+  font-size: 1.8em;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.card-text-content h2 {
+  color: #374151; /* Lighter gray for H2 */
+  font-size: 1.1em;
+  font-weight: normal;
+  line-height: 1.6;
+}
+
+/* Showcase Section Styles */
+.showcase-section {
+  position: relative; /* For positioning the ::before pseudo-element */
+  padding: 220px 20px 80px 20px; /* Increased top padding, then content, then bottom */
+  background-image: url('assets/bggradientcool.png');
+  background-size: 150% 150%; /* Make background larger than container */
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: flowBackgroundReverse 40s ease-in-out infinite; /* Apply REVERSED animation */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.showcase-section::before { /* White fade from top */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 22%; /* Adjust height of the fade area */
+  background: linear-gradient(to top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+  pointer-events: none;
+}
+
+.showcase-section::after { /* Dark fade to bottom */
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25%; /* Adjust height of the fade area */
+  background: linear-gradient(to bottom, rgba(23, 30, 48, 0) 0%, rgb(23, 30, 48) 100%);
+  pointer-events: none;
+  z-index: 0; /* Ensure it's behind content but above main background if needed, or just part of bg */
+}
+
+.showcase-image-container {
+  margin-bottom: 40px;
+  max-width: 800px; /* Adjust as needed */
+  width: 90%;
+}
+
+.showcase-main-image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  background-color: #e0e0e0; /* Placeholder color if image doesn't load */
+}
+
+.showcase-text-box {
+  /* Reusing styles similar to .hero-text-box */
+  background-color: rgba(30, 30, 50, 0.25);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  max-width: 700px; /* Consistent with hero text box */
+  width: 90%;
+  z-index: 1; /* Ensure it's above background effects like the fade */
+}
+
+.showcase-text-box h1 {
+  /* Reusing styles similar to .hero-text-box h1 */
+  font-size: 2.8em; /* Slightly adjusted for context */
+  margin-top: 0;
+  margin-bottom: 0.3em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #f0f0f5;
+}
+
+.showcase-text-box h2 {
+  /* Reusing styles similar to .hero-text-box h2 */
+  font-size: 1.4em; /* Slightly adjusted for context */
+  font-weight: 400;
+  margin-bottom: 0;
+  color: #d0d0e0;
+  line-height: 1.5;
+}
+
+/* Sticky Navigation Pill Styles */
+.sticky-nav-pill {
+  position: fixed; /* Or sticky, but fixed is simpler for always-on-top */
+  top: 20px; /* Space from the top */
+  left: 50%;
+  transform: translateX(-50%); /* Center the pill */
+  z-index: 1000; /* Ensure it's above other content */
+  padding: 10px 15px;
+  border-radius: 16px; /* Pill shape */
+  /* Glassy blur effect - same as .hero-text-box */
+  background-color: rgba(30, 30, 50, 0.25); 
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex; /* Arrange links in a row */
+  gap: 15px; /* Space between links */
+}
+
+.sticky-nav-pill a {
+  color: #e0e0e5; /* Light text color for links */
+  text-decoration: none;
+  font-size: 0.95em;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 16px; /* Slightly rounded individual link backgrounds on hover */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sticky-nav-pill a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+/* Pricing Section Styles */
+.pricing-section {
+  background-color: rgb(23, 30, 48); /* Dark grayish-blue */
+  color: #ffffff;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.pricing-header {
+  margin-bottom: 60px;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pricing-supertitle {
+  color: #8A94A6; /* Lighter gray for supertitle */
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pricing-header h2 {
+  font-size: 2.8em;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.pricing-subtitle {
+  color: #A0ABC0; /* Softer white/gray */
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.pricing-toggle {
+  display: inline-flex;
+  background-color: rgba(40, 52, 80, 0.7); /* Slightly lighter dark blue */
+  border-radius: 50px; /* Pill shape for the toggle container */
+  padding: 5px;
+}
+
+.toggle-btn {
+  background-color: transparent;
+  color: #A0ABC0;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 40px; /* Rounded buttons inside */
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.toggle-btn.active {
+  background-color: #4A5568; /* Medium gray for active toggle */
+  color: #ffffff;
+}
+
+.pricing-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align cards to the top if they had different heights */
+}
+
+.pricing-card {
+  background-color: rgb(30, 39, 61); /* Slightly lighter than section bg */
+  padding: 25px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 380px; /* Max width of the pricing card */
+  text-align: left;
+  border: 1px solid transparent; /* Base for potential border highlight */
+}
+
+.pricing-card.startup-plan {
+
+  /* Applying gradient border using the multi-background technique */
+  background-image:
+    linear-gradient(rgb(30, 39, 61), rgb(30, 39, 61)), /* Inner background, matches card's own bg */
+    linear-gradient(to right, #7F5CE4, #F85F2B);      /* Border gradient from learn-more-btn */
+  background-origin: border-box;
+  background-clip: padding-box, border-box; /* padding-box for inner, border-box for outer/border */
+}
+
+.plan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.plan-header h3 {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.most-popular-badge {
+  background-color: #F87171; /* Indigo */
+  color: #ffffff;
+  font-size: 0.75em;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.plan-description {
+  color: #A0ABC0;
+  font-size: 0.95em;
+  line-height: 1.6;
+  margin-bottom: 0px;
+  min-height: 50px; /* Give some space even if description is short */
+}
+
+.plan-price {
+  font-size: 3em;
+  font-weight: 600;
+  color: #ffffff;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.plan-price span {
+  font-size: 0.4em; /* Smaller /month text */
+  font-weight: 400;
+  color: #A0ABC0;
+  margin-left: 5px;
+}
+
+.buy-plan-btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 30px;
+  background-color: #4A5568; /* Default button for non-highlighted plans */
+  color: #E2E8F0;
+}
+
+.pricing-card.startup-plan .buy-plan-btn {
+  background-image: linear-gradient(to right, #7F5CE4, #F85F2B); /* Gradient from learn-more-btn */
+  color: #ffffff;
+}
+
+.buy-plan-btn:hover {
+  opacity: 0.9;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.features-list li {
+  color: #A0ABC0;
+  font-size: 0.95em;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.features-list .tick {
+  color: #ffffff; /* Indigo tick */
+  margin-right: 10px;
+  font-size: 1.1em;
+}
+
+/* About Section Styles */
+.about-section {
+  position: relative; /* For pseudo-elements and positioning text box */
+  min-height: 100vh; /* Ensure it takes significant space */
+  padding: 150px 20px 80px 20px; /* Ample padding, especially at top for fade */
+  display: flex;
+  align-items: center; /* Vertically center the text box */
+  justify-content: center; /* Horizontally center the text box (if it has a max-width) */
+
+  /* Reusing hero section background and animation */
+  background-image: url('assets/bggradient.jpg'); 
+  background-size: 150% 150%; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  animation: flowBackground 40s ease-in-out infinite; 
+  overflow: hidden; /* Important if text box is large to prevent scrollbars from it */
+}
+
+.about-section::before { /* Dark blue fade from top */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30%; /* Adjust height of the fade area */
+  background: linear-gradient(to top, rgba(23, 30, 48, 0) 0%, rgb(23, 30, 48) 100%);
+  pointer-events: none;
+  z-index: 1; /* Above the main background, below the text box */
+}
+
+.about-text-box {
+  /* Similar to hero-text-box but larger and left-aligned */
+  background-color: rgba(30, 30, 50, 0.25);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  padding: 40px 50px;
+  border-radius: 20px; /* Slightly larger radius */
+  box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  max-width: 900px; /* Wider than hero text box */
+  width: 85%;
+  z-index: 2; /* Above the fade overlay */
+  text-align: left;
+  color: #f0f0f5;
+}
+
+.about-text-box h1 {
+  font-size: 2em; /* Adjust as needed */
+  margin-top: 0;
+  margin-bottom: 0.4em;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+.about-text-box h2 {
+  font-size: 1em; /* Adjust as needed */
+  font-weight: 100;
+  margin-bottom: 0;
+  line-height: 1.65;
+  color: #d0d0e0;
+} 

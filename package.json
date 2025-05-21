@@ -1,0 +1,11 @@
+{
+  "name": "shopai-website-dev",
+  "version": "0.1.0",
+  "description": "Local development server for ShopAI static site.",
+  "scripts": {
+    "dev": "live-server public/ --port=8080 --no-browser"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
