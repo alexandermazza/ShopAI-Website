@@ -9,101 +9,287 @@
   </head>
   <body>
     <nav class="sticky-nav-pill">
-      <a href="#">AI Search</a>
-      <a href="#">Review Summaries</a>
-      <a href="#">Ease of Use</a>
-      <a href="#">Pricing</a>
-      <a href="#">About</a>
+      <button class="hamburger-menu" id="hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#" data-scroll-to="features">Features</a>
+        <a href="#" data-scroll-to="ease-of-use">Ease of Use</a>
+        <a href="#" data-scroll-to="pricing">Pricing</a>
+        <a href="#" data-scroll-to="contact-us">Contact Us</a>
+      </div>
     </nav>
 
     <div class="hero-section-container">
-
       <div class="hero-content-area">
-        <div class="hero-text-box">
-          <h1>ShopAI</h1>
-          <h2>Revolutionizing Your Shopping Experience</h2>
-          <button id="learn-more-button" class="learn-more-btn">Learn More</button>
+        <h1 class="hero-title">ShopAI</h1>
+        <h2 class="hero-subtitle">The GPT For Your Store</h2>
+        <button id="cta-button" class="border-magic-button">
+          <a href="https://apps.shopify.com/shopai-4" target="_blank" rel="noopener noreferrer">Install Now</a>
+        </button>
+      </div>
+      
+      <div class="hero-question-section">
+        <h1 class="question-intro">Answer any product question, like...</h1>
+        <div class="question-container">
+          <span class="question-text" id="animated-question">How many inches is this snowboard?</span>
         </div>
       </div>
     </div>
+
+    <!-- Animated Gradient Separator -->
+    <div class="gradient-separator"></div>
 
     <div class="section-title-container">
-      <h1 class="section-title">2 Ways To Become AI Powered</h1>
+      <h1 class="section-title animate-on-scroll">2 Ways To Become AI-Powered</h1>
     </div>
-    <section class="cards-section">
+    <section class="cards-section" id="features">
       <div class="info-card">
-        <video src="assets/videos/suggestedquestions.mp4" alt="Feature 1 Suggested Questions Video" class="card-image" autoplay loop muted playsinline>
+        <video src="assets/videos/askmeanything.mp4" alt="Feature 1 Suggested Questions Video" class="card-image animate-on-scroll-left" autoplay loop muted playsinline>
           Your browser does not support the video tag.
         </video>
         <div class="card-text-content">
-          <h1>AI Search Bar</h1>
-          <h2>Discover the power of X.</h2>
+          <h1 class="animate-on-scroll-left">AI Search Bar</h1>
+          <h2>Let your product pages speak for themselves. ShopAI adds a slick AI-powered search bar that lets shoppers ask anything—like "Is this waterproof?" or "Good for beginners?"—and get instant answers pulled from your product details and reviews.</h2>
+          <h2>To make things even easier, it auto-generates three suggested questions tailored to each product, so customers can just tap and go. No more guessing. Just smarter shopping.</h2>
         </div>
       </div>
       <div class="info-card">
-        <video src="assets/videos/reviewsummary.mp4" alt="Feature 2 Review Summary Video" class="card-image" autoplay loop muted playsinline>
+        <video src="assets/videos/reviewsummary.mp4" alt="Feature 2 Review Summary Video" class="card-image animate-on-scroll-right" autoplay loop muted playsinline>
           Your browser does not support the video tag.
         </video>
         <div class="card-text-content">
-          <h1>AI Review Summary</h1>
-          <h2>Unlock new possibilities.</h2>
+          <h1 class="animate-on-scroll-right">AI Review Summary</h1>
+          <h2>Nobody has time to read 87 reviews. ShopAI reads them all and gives shoppers a quick, honest summary of what people are actually saying—good, bad, and in between.</h2>
+          <h2>It cuts through the fluff so customers get the real story fast, and you get more trust (and conversions) without lifting a finger.</h2>
         </div>
       </div>
     </section>
 
-    <section class="showcase-section">
+    <!-- OpenAI Powered Section -->
+    <section class="openai-section">
+      <div class="openai-gradient-box">
+        <div class="openai-content">
+          <div class="openai-logo-container animate-on-scroll-scale">
+            <img src="assets/openai.png" alt="OpenAI Logo" class="openai-logo">
+          </div>
+          <h1 class="openai-title animate-on-scroll">Powered by OpenAI</h1>
+          <h2 class="openai-description animate-on-scroll">Give your shoppers instant, intelligent answers & summaries with cutting-edge ChatGPT models.</h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase-section" id="ease-of-use">
+      <div class="aurora-bg"></div>
       <div class="showcase-image-container">
-        <video src="assets/videos/addtoshop.mp4" alt="Main Showcase Image" class="showcase-main-image" autoplay loop muted playsinline>
+        <video src="assets/videos/addtoshop.mp4" alt="Main Showcase Image" class="showcase-main-image animate-on-scroll" autoplay loop muted playsinline>
       </div>
       <div class="showcase-text-box">
-        <h1>AI is 2 clicks away</h1>
-        <h2>Add AI to your store in under 10 seconds. You're 2 clicks away from an AI powered store.</h2>
+        <h1 class="animate-on-scroll">AI is 2 clicks away</h1>
+        <h2>No coding. No training. <strong>No problem.</strong></h2>
       </div>
     </section>
 
-    <section class="pricing-section">
+    <section class="pricing-section" id="pricing">
       <div class="pricing-header">
-        <p class="pricing-supertitle">Pricing</p>
-        <h2>Pricing that grows with you</h2>
-        <p class="pricing-subtitle">Choose an affordable plan that's packed with the best features for engaging your audience, creating customer loyalty, and driving sales.</p>
+        <p class="pricing-supertitle animate-on-scroll">One Price Fits All</p>
       </div>
       <div class="pricing-card-container">
         <div class="pricing-card startup-plan">
-          <p class="plan-price">$29 <span>/month</span></p>
-          <button class="buy-plan-btn">Buy plan</button>
+          <p class="plan-price animate-on-scroll" style="text-align: center;">$19<span>/month</span></p>
+          <a href="https://apps.shopify.com/shopai-4" class="buy-plan-btn animate-on-scroll">Buy plan</a>
           <ul class="features-list">
-            <li><span class="tick">&#10003;</span> 25 products</li>
-            <li><span class="tick">&#10003;</span> 25 products</li>
-            <li><span class="tick">&#10003;</span> 25 products</li>
-            <li><span class="tick">&#10003;</span> 25 products</li>
-            <li><span class="tick">&#10003;</span> Up to 10,000 subscribers</li>
-            <li><span class="tick">&#10003;</span> Advanced analytics</li>
-            <li><span class="tick">&#10003;</span> 24-hour support response time</li>
-            <li><span class="tick">&#10003;</span> Marketing automations</li>
+            <li><span class="tick">&#10003;</span> "Ask Me Anything" AI search bar</li>
+            <li><span class="tick">&#10003;</span> AI review summaries</li>
+            <li><span class="tick">&#10003;</span> AI generated suggested questions</li>
+            <li><span class="tick">&#10003;</span> Access to cutting-edge OpenAI models</li>
+            <li><span class="tick">&#10003;</span> Custom tones of voice</li>
+            <li><span class="tick">&#10003;</span> Multi-language support</li>
+            <li><span class="tick">&#10003;</span> Full branding & logo customization</li>
+            <li><span class="tick">&#10003;</span> Custom context training based on your store</li>
+            <li><span class="tick">&#10003;</span> Full product support</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section class="about-section">
-      <div class="about-text-box">
-        <h1>About ShopAI</h1>
-        <h2>We are passionate about revolutionizing the way you connect with products and services, making discovery intuitive and delightful. Our mission is to empower both shoppers and businesses through intelligent, personalized experiences.</h2>
+    <!-- Animated Gradient Separator -->
+    <div class="gradient-separator"></div>
+
+    <section class="contact-us-section" id="contact-us">
+      <div class="contact-us-form-box">
+        <h1 class="animate-on-scroll">Contact Us</h1>
+        <h2 class="animate-on-scroll">Have questions? Feature requests? Bugs? Let us know!</h2>
+        <form action="https://formspree.io/f/mdkzynoz" method="POST" class="contact-form">
+          <div class="form-group">
+            <label for="email">Your Email:</label>
+            <input type="email" name="email" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Your Message:</label>
+            <textarea name="message" id="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn animate-on-scroll">Send Message</button>
+        </form>
       </div>
     </section>
 
+    <!-- Footer Section -->
+    <footer class="footer-section">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="privacy.html" class="privacy-link animate-on-scroll">Privacy Policy</a>
+        </div>
+        <div class="footer-copyright">
+          <p class="animate-on-scroll">&copy; 2025 ShopAI. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
     <script>
-      const learnMoreButton = document.getElementById('learn-more-button');
-      if (learnMoreButton) {
-        learnMoreButton.addEventListener('click', () => {
-          learnMoreButton.classList.add('blurred'); // Add blur
+      // Simplified intersection observer - back to individual elements but throttled
+      const createObserver = () => {
+        const observerOptions = {
+          threshold: 0.2,
+          rootMargin: '0px 0px -50px 0px'
+        };
+
+        // Throttle the intersection observer callback
+        let isThrottled = false;
+        const observer = new IntersectionObserver((entries) => {
+          if (isThrottled) return;
+          isThrottled = true;
           
-          // Remove blur after 1 second (1000 milliseconds)
-          setTimeout(() => {
-            learnMoreButton.classList.remove('blurred');
-          }, 1000); 
-        });
+          requestAnimationFrame(() => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target);
+              }
+            });
+            
+            // Reset throttle
+            setTimeout(() => {
+              isThrottled = false;
+            }, 16);
+          });
+        }, observerOptions);
+
+        // Observe all animated elements (but with throttling for performance)
+        const animateElements = document.querySelectorAll(
+          '[class*="animate-on-scroll"]'
+        );
+        
+        animateElements.forEach(el => observer.observe(el));
+      };
+
+      // Text flip animation for hero questions
+      const questions = [
+        "Will this sweater shrink in the wash?",
+        "How many inches is this snowboard?",
+        "What's the return policy?",
+        "What do the reviews say?",
+        "Is this jacket waterproof?",
+        "How long is the warranty?",
+        "What's the best way to clean this dress?",
+        "Is this hand made?"
+      ];
+      
+      let currentQuestionIndex = 0;
+      const questionElement = document.getElementById('animated-question');
+      const questionContainer = document.querySelector('.question-container');
+      
+      // Removed DOM measurement for better performance
+      
+      function animateLetters(text) {
+        // Simple fade transition without DOM manipulation
+        questionElement.textContent = text;
       }
+      
+      function changeQuestion() {
+        // Simple transition without width manipulation
+        const nextQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+        
+        // Fade out current question
+        questionElement.classList.add('fade-out');
+        
+        setTimeout(() => {
+          // Change to next question
+          currentQuestionIndex = nextQuestionIndex;
+          questionElement.classList.remove('fade-out');
+          
+          // Set new question text
+          animateLetters(questions[currentQuestionIndex]);
+        }, 300);
+      }
+      
+      // Simple instant scrolling to avoid scroll conflicts
+      function smoothScrollWithOffset(target) {
+        const element = document.getElementById(target);
+        if (element) {
+          const offsetTop = element.offsetTop - 100; // Account for fixed nav
+          // Use instant scrolling to avoid conflicts
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'auto' // Changed from 'smooth' to 'auto'
+          });
+        }
+      }
+
+      // Simplified initialization - just show all content immediately
+      document.addEventListener('DOMContentLoaded', function() {
+        // Skip intersection observer entirely and just show all animations
+        const animateElements = document.querySelectorAll('[class*="animate-on-scroll"]');
+        animateElements.forEach(el => el.classList.add('animate-in'));
+        
+        // Also add animate-in to other elements that need it but don't have animate-on-scroll class
+        const otherAnimatedElements = document.querySelectorAll('.pricing-card, .contact-us-form-box, .footer-section, .showcase-text-box, .openai-gradient-box, .section-title-container, .pricing-header');
+        otherAnimatedElements.forEach(el => el.classList.add('animate-in'));
+        
+        // Start the hero question animation
+        setTimeout(() => {
+          animateLetters(questions[0]);
+        }, 1000);
+        
+        // Change question every 4 seconds (slower for better performance)
+        setInterval(changeQuestion, 4000);
+      });
+
+      // Hamburger menu functionality
+      const hamburgerMenu = document.getElementById('hamburger-menu');
+      const navLinks = document.getElementById('nav-links');
+      
+      hamburgerMenu.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navLinks.classList.toggle('active');
+        hamburgerMenu.classList.toggle('active');
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!navLinks.contains(e.target) && !hamburgerMenu.contains(e.target)) {
+          navLinks.classList.remove('active');
+          hamburgerMenu.classList.remove('active');
+        }
+      });
+      
+      // Handle navigation link clicks for smooth scrolling
+      navLinks.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') {
+          e.preventDefault(); // Prevent default anchor behavior
+          
+          const targetId = e.target.getAttribute('data-scroll-to');
+          smoothScrollWithOffset(targetId);
+          
+          // Close mobile menu
+          navLinks.classList.remove('active');
+          hamburgerMenu.classList.remove('active');
+        }
+      });
+
+      // Removed laggy parallax scroll effect
     </script>
   </body>
 </html> 
