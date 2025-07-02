@@ -37,7 +37,7 @@ body, html {
   padding: 0;
   height: auto;
   width: 100%;
-  font-family: 'Inter', sans-serif !important; /* Base font */
+  font-family: 'Sora', sans-serif !important; /* Base font */
   overflow-x: hidden; /* Prevent horizontal scroll, allow vertical */
   overflow-y: auto;   /* Enable vertical scrolling */
   color: white; /* Default text color for content on dark background */
@@ -48,11 +48,11 @@ body, html {
 
 /* Comprehensive global font application */
 *, *::before, *::after {
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'Sora', sans-serif !important;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, a, li, button, input, textarea, select, span, div, nav, section, article, aside, header, footer, main {
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'Sora', sans-serif !important;
 }
 
 .hero-section-container { /* Renamed class */
@@ -193,7 +193,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, button, input, textarea, select, span, d
   cursor: pointer;
   overflow: hidden;
   transition: all 0.3s ease;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Sora', sans-serif;
   z-index: 1;
   animation: buttonEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
   will-change: transform, box-shadow;
@@ -274,6 +274,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, button, input, textarea, select, span, d
 }
 
 /* Hero Question Section */
+/* Hero Question Section */
 .hero-question-section {
   position: absolute;
   bottom: 32%;
@@ -283,9 +284,13 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, button, input, textarea, select, span, d
   text-align: center;
   width: 90%;
   max-width: 800px;
-  animation: questionSectionRise 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+  animation: questionSectionRise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
   will-change: opacity, transform;
   opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 .question-intro {
@@ -316,21 +321,107 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, button, input, textarea, select, span, d
   will-change: backdrop-filter;
 }
 
-.question-text {
-  font-size: 1.8rem;
-  font-weight: 700;
+/* Container Text Flip Styles */
+.question-text-flip {
+  position: relative;
+  min-width: 300px;
+  max-width: 700px; /* Set a reasonable maximum width */
+  height: 60px;
+  border-radius: 30px;
+  background: linear-gradient(45deg, #936FF4, #034ca4, #FD5D67, #FD9F4B, #936FF4);
+  transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  will-change: width;
+  transform: translateZ(0);
+  margin: 0 auto;
+  padding: 3px;
+}
+
+/* White inner container for text */
+.question-text-flip::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 60px; /* Leave space for the icon in gradient area */
+  right: 3px;
+  bottom: 3px;
+  background: white;
+  border-radius: 28px 28px 27px 28px; /* Curved on both sides for smooth transition */
+  z-index: 1;
+}
+
+@keyframes borderGradientFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* AI Icon Container - now positioned in gradient area */
+.ai-icon-container {
+  width: 54px;
+  height: 54px;
+  border-radius: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 2;
+  position: relative;
+}
+
+.ai-icon {
+  width: 24px;
+  height: 24px;
   color: white;
+}
+
+.question-text-content {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: black;
   display: inline-block;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-  -webkit-text-stroke: 0.5px transparent;
+  white-space: nowrap;
+  text-align: left;
+  flex: 1;
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  z-index: 2;
+  position: relative;
+  padding-left: 30px; /* Increased from 20px */
+  padding-right: 20px; /* Add right padding to prevent text cutoff */
+  margin-left: -6px; /* Overlap slightly with the white area */
+  line-height: 1.2;
+  overflow: visible; /* Ensure text is not clipped */
+  min-width: 0; /* Allow flexbox to shrink if needed */
 }
 
-.question-text.fade-out {
+.question-text-content .letter {
+  display: inline-block;
   opacity: 0;
+  filter: blur(10px);
+  animation: letterReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, filter;
+  transform: translateZ(0);
+  vertical-align: baseline;
+  line-height: 1;
+}
+
+@keyframes letterReveal {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
 }
 
 @keyframes letterBlur {
@@ -347,7 +438,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, button, input, textarea, select, span, d
 /* Section Title Styles (for above cards) */
 .section-title-container {
   text-align: center; /* Center the h1 within this div */
-  padding: 90px 20px 20px 20px; /* Add some space around it, less at bottom before cards */
+  padding: 90px 20px 50px 20px; /* Increased bottom padding for more space before cards */
   background-color: #041725; /* Ensure it's on the white background */
 }
 
@@ -798,7 +889,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, button, input, textarea, select, span, d
   background: #041725;
   color: #ffffff;
   overflow: hidden;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Sora', sans-serif;
   z-index: 1;
   text-decoration: none;
   display: inline-block;
@@ -866,24 +957,26 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, button, input, textarea, select, span, d
   display: flex;
   align-items: center;
   opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-30px);
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, opacity;
 }
 
 .pricing-card.animate-in .features-list li {
   opacity: 1;
   transform: translateX(0);
+  will-change: auto;
 }
 
 .pricing-card.animate-in .features-list li:nth-child(1) { transition-delay: 0.1s; }
-.pricing-card.animate-in .features-list li:nth-child(2) { transition-delay: 0.15s; }
-.pricing-card.animate-in .features-list li:nth-child(3) { transition-delay: 0.2s; }
-.pricing-card.animate-in .features-list li:nth-child(4) { transition-delay: 0.25s; }
-.pricing-card.animate-in .features-list li:nth-child(5) { transition-delay: 0.3s; }
-.pricing-card.animate-in .features-list li:nth-child(6) { transition-delay: 0.35s; }
-.pricing-card.animate-in .features-list li:nth-child(7) { transition-delay: 0.4s; }
-.pricing-card.animate-in .features-list li:nth-child(8) { transition-delay: 0.45s; }
-.pricing-card.animate-in .features-list li:nth-child(9) { transition-delay: 0.5s; }
+.pricing-card.animate-in .features-list li:nth-child(2) { transition-delay: 0.2s; }
+.pricing-card.animate-in .features-list li:nth-child(3) { transition-delay: 0.3s; }
+.pricing-card.animate-in .features-list li:nth-child(4) { transition-delay: 0.4s; }
+.pricing-card.animate-in .features-list li:nth-child(5) { transition-delay: 0.5s; }
+.pricing-card.animate-in .features-list li:nth-child(6) { transition-delay: 0.6s; }
+.pricing-card.animate-in .features-list li:nth-child(7) { transition-delay: 0.7s; }
+.pricing-card.animate-in .features-list li:nth-child(8) { transition-delay: 0.8s; }
+.pricing-card.animate-in .features-list li:nth-child(9) { transition-delay: 0.9s; }
 
 .features-list li:hover {
   transform: translate3d(5px, 0, 0);
@@ -1025,7 +1118,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, button, input, textarea, select, span, d
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.1);
   color: #f0f0f5;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: 0.9em;
   backdrop-filter: blur(5px);
   transition: all 0.3s ease;
@@ -1059,7 +1152,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, li, button, input, textarea, select, span, d
   background: #041725;
   color: #ffffff;
   overflow: hidden;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Sora', sans-serif;
   z-index: 1;
   opacity: 0;
   transform: translateY(20px);
@@ -1141,7 +1234,7 @@ html::after {
 .openai-section {
   position: relative;
   background-color: #041725;
-  padding: 120px 20px;
+  padding: 180px 20px; /* Increased top and bottom padding */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1387,24 +1480,35 @@ html::after {
     -webkit-font-smoothing: antialiased;
   }
   
-  .question-text {
-    font-size: 1.3rem;
+  .question-text-flip {
+    min-width: 290px;
+    max-width: calc(100vw - 40px); /* Allow more width on tablets */
+    height: 50px;
+  }
+  
+  .question-text-flip::after {
+    left: 50px; /* Reduced from 60px for smaller icon */
+  }
+  
+  .question-text-content {
+    font-size: 1rem;
     font-weight: 600;
     text-rendering: optimizeSpeed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    word-break: break-word;
-    overflow-wrap: break-word;
+    padding-left: 35px; /* Increased to ensure proper spacing */
+    padding-right: 15px; /* Add right padding for mobile */
+    margin-left: 0; /* Remove negative margin on mobile */
   }
   
-  .question-container {
-    padding: 15px 20px;
-    max-width: calc(100vw - 40px);
-    box-sizing: border-box;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .ai-icon-container {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .ai-icon {
+    width: 20px;
+    height: 20px;
   }
   
   .hero-question-section {
@@ -1482,26 +1586,35 @@ html::after {
     -webkit-font-smoothing: antialiased;
   }
   
-  .question-text {
-    font-size: 1.1rem;
+  .question-text-flip {
+    min-width: 280px;
+    max-width: calc(100vw - 20px); /* Allow more width on small mobile */
+    height: 45px;
+  }
+  
+  .question-text-flip::after {
+    left: 46px; /* Reduced for smaller icon */
+  }
+  
+  .question-text-content {
+    font-size: 0.95rem;
     font-weight: 600;
     text-rendering: optimizeSpeed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    word-break: break-word;
-    overflow-wrap: break-word;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    padding-left: 30px; /* Increased to ensure proper spacing */
+    padding-right: 12px; /* Add right padding for small mobile */
+    margin-left: 0; /* Remove negative margin on small mobile */
   }
   
-  .question-container {
-    padding: 12px 15px;
-    min-height: 50px;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    max-width: calc(100vw - 30px);
-    overflow: hidden;
+  .ai-icon-container {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .ai-icon {
+    width: 18px;
+    height: 18px;
   }
   
   .hero-title {
@@ -1894,17 +2007,26 @@ html::after {
     -webkit-backdrop-filter: blur(4px);
   }
   
-  /* Disable heavy glow effects on mobile */
-  .openai-gradient-box::after,
+  /* Reduce but don't disable glow effects on mobile */
+  .openai-gradient-box::after {
+    filter: blur(15px);
+    opacity: 0.4;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+  }
+  
   .openai-section::before {
-    display: none;
+    filter: blur(30px);
+    opacity: 0.2;
   }
 }
 
 /* Animated Gradient Separator */
 .gradient-separator {
   width: 100%;
-  height: 4px;
+  height: 8px;
   background: linear-gradient(90deg, #936FF4, #034ca4, #FD5D67, #FD9F4B, #936FF4);
   background-size: 300% 100%;
   animation: gradientFlow 6s ease-in-out infinite;
@@ -1920,5 +2042,113 @@ html::after {
   }
   50% {
     background-position: 100% 50%;
+  }
+}
+
+/* Benefits Section Styles */
+.benefits-section {
+  padding: 80px 0;
+  background: #041725;
+  position: relative;
+}
+
+.benefits-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.benefit-card {
+  background: rgba(20, 25, 35, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  backdrop-filter: blur(10px);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(147, 111, 244, 0.3);
+  box-shadow: 0 20px 40px rgba(147, 111, 244, 0.1);
+}
+
+.benefit-card h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Unique gradients for each benefit card */
+.benefit-card:nth-child(1) h1 {
+  background: linear-gradient(135deg, #936FF4, #3DDC97);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.benefit-card:nth-child(2) h1 {
+  background: linear-gradient(135deg, #88BCFA, #FD5D67);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.benefit-card:nth-child(3) h1 {
+  background: linear-gradient(135deg, #FD9F4B, #936FF4);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.benefit-card h2 {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0;
+  opacity: 0.9;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .benefits-section {
+    padding: 60px 0;
+  }
+  
+  .benefits-cards-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 15px;
+  }
+  
+  .benefit-card {
+    padding: 30px 20px;
+    min-height: 180px;
+  }
+  
+  .benefit-card h1 {
+    font-size: 1.5rem;
+  }
+  
+  .benefit-card h2 {
+    font-size: 1rem;
   }
 }

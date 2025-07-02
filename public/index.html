@@ -3,9 +3,22 @@
     <title>ShopAI - Welcome</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- OpenGraph Meta Tags -->
+    <meta property="og:title" content="ShopAI - The AI For Your Web Store">
+    <meta property="og:description" content="Give your shoppers instant, intelligent answers & summaries with cutting-edge ChatGPT models. AI-powered search bar and review summaries for your Shopify store.">
+    <meta property="og:image" content="assets/opengraph.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shopai.app">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ShopAI - The AI For Your Web Store">
+    <meta name="twitter:description" content="Give your shoppers instant, intelligent answers & summaries with cutting-edge ChatGPT models. AI-powered search bar and review summaries for your Shopify store.">
+    <meta name="twitter:image" content="assets/opengraph.png">
   </head>
   <body>
     <nav class="sticky-nav-pill">
@@ -33,8 +46,17 @@
       
       <div class="hero-question-section">
         <h1 class="question-intro">Answer any product question, like...</h1>
-        <div class="question-container">
-          <span class="question-text" id="animated-question">How many inches is this snowboard?</span>
+        <div class="question-text-flip" id="animated-question">
+          <div class="ai-icon-container">
+            <svg class="ai-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+              <path d="M5 3v4"></path>
+              <path d="M19 17v4"></path>
+              <path d="M3 5h4"></path>
+              <path d="M17 19h4"></path>
+            </svg>
+          </div>
+          <span class="question-text-content"></span>
         </div>
       </div>
     </div>
@@ -52,7 +74,7 @@
         </video>
         <div class="card-text-content">
           <h1 class="animate-on-scroll-left">AI Search Bar</h1>
-          <h2>Let your product pages speak for themselves. ShopAI adds a slick AI-powered search bar that lets shoppers ask anything—like "Is this waterproof?" or "Good for beginners?"—and get instant answers pulled from your product details and reviews.</h2>
+          <h2>Let your product pages speak for themselves. ShopAI adds a slick AI-powered search bar that lets shoppers ask anything - like "Is this waterproof?" or "Good for beginners?" and get instant answers pulled from your product details and reviews.</h2>
           <h2>To make things even easier, it auto-generates three suggested questions tailored to each product, so customers can just tap and go. No more guessing. Just smarter shopping.</h2>
         </div>
       </div>
@@ -62,8 +84,31 @@
         </video>
         <div class="card-text-content">
           <h1 class="animate-on-scroll-right">AI Review Summary</h1>
-          <h2>Nobody has time to read 87 reviews. ShopAI reads them all and gives shoppers a quick, honest summary of what people are actually saying—good, bad, and in between.</h2>
+          <h2>Nobody has time to read 87 reviews. ShopAI reads them all and gives shoppers a quick, honest summary of what people are actually saying - good, bad, and in between.</h2>
           <h2>It cuts through the fluff so customers get the real story fast, and you get more trust (and conversions) without lifting a finger.</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+      <div class="section-title-container">
+        <h1 class="section-title animate-on-scroll">Why ShopAI?</h1>
+      </div>
+      <div class="benefits-cards-container">
+        <div class="benefit-card animate-on-scroll-left">
+          <h1>Save Time</h1>
+          <h2>No more answering repetitive questions</h2>
+        </div>
+        
+        <div class="benefit-card animate-on-scroll">
+          <h1>Boost Sales</h1>
+          <h2>Quicker customer knowledge, faster conversions</h2>
+        </div>
+        
+        <div class="benefit-card animate-on-scroll-right">
+          <h1>Stay Competitive</h1>
+          <h2>Companies like Amazon are already using similar technology</h2>
         </div>
       </div>
     </section>
@@ -97,7 +142,7 @@
         <p class="pricing-supertitle animate-on-scroll">One Price Fits All</p>
       </div>
       <div class="pricing-card-container">
-        <div class="pricing-card startup-plan">
+        <div class="pricing-card startup-plan animate-on-scroll">
           <p class="plan-price animate-on-scroll" style="text-align: center;">$19<span>/month</span></p>
           <a href="https://apps.shopify.com/shopai-4" class="buy-plan-btn animate-on-scroll">Buy plan</a>
           <ul class="features-list">
@@ -152,29 +197,25 @@
       // Simplified intersection observer - back to individual elements but throttled
       const createObserver = () => {
         const observerOptions = {
-          threshold: 0.2,
-          rootMargin: '0px 0px -50px 0px'
+          threshold: 0.1,
+          rootMargin: '0px 0px -100px 0px'
         };
 
-        // Throttle the intersection observer callback
-        let isThrottled = false;
+        // Debounce the intersection observer callback for better performance
+        let debounceTimer = null;
         const observer = new IntersectionObserver((entries) => {
-          if (isThrottled) return;
-          isThrottled = true;
+          // Clear previous timer
+          if (debounceTimer) clearTimeout(debounceTimer);
           
-          requestAnimationFrame(() => {
+          // Debounce the callback to reduce frequency
+          debounceTimer = setTimeout(() => {
             entries.forEach(entry => {
               if (entry.isIntersecting) {
                 entry.target.classList.add('animate-in');
                 observer.unobserve(entry.target);
               }
             });
-            
-            // Reset throttle
-            setTimeout(() => {
-              isThrottled = false;
-            }, 16);
-          });
+          }, 100);
         }, observerOptions);
 
         // Observe all animated elements (but with throttling for performance)
@@ -185,44 +226,99 @@
         animateElements.forEach(el => observer.observe(el));
       };
 
-      // Text flip animation for hero questions
+      // Container Text Flip animation for hero questions
       const questions = [
         "Will this sweater shrink in the wash?",
-        "How many inches is this snowboard?",
+        "How many calories are in this?",
+        "Is this water proof?",
         "What's the return policy?",
-        "What do the reviews say?",
+        "What do the reviews say about this guitar?",
         "Is this jacket waterproof?",
-        "How long is the warranty?",
+        "How long is the warranty on this?",
         "What's the best way to clean this dress?",
         "Is this hand made?"
       ];
       
       let currentQuestionIndex = 0;
-      const questionElement = document.getElementById('animated-question');
-      const questionContainer = document.querySelector('.question-container');
+      const questionFlipContainer = document.getElementById('animated-question');
+      const questionTextContent = questionFlipContainer.querySelector('.question-text-content');
       
-      // Removed DOM measurement for better performance
+      function measureTextWidth(text) {
+        // Create a temporary element to measure text width
+        const temp = document.createElement('span');
+        temp.style.visibility = 'hidden';
+        temp.style.position = 'absolute';
+        temp.style.whiteSpace = 'nowrap';
+        temp.style.fontFamily = 'Sora, sans-serif';
+        
+        // Use responsive font size to match CSS
+        if (window.innerWidth <= 480) {
+          temp.style.fontSize = '0.95rem';
+        } else if (window.innerWidth <= 768) {
+          temp.style.fontSize = '1rem';
+        } else {
+          temp.style.fontSize = '1.1rem';
+        }
+        temp.style.fontWeight = '600';
+        
+        temp.textContent = text;
+        document.body.appendChild(temp);
+        const textWidth = temp.offsetWidth;
+        document.body.removeChild(temp);
+        
+        // Calculate icon area + padding + extra buffer based on screen size
+        let iconAreaAndPadding;
+        if (window.innerWidth <= 480) {
+          iconAreaAndPadding = 46 + 30 + 50; // icon area + padding + generous extra space
+        } else if (window.innerWidth <= 768) {
+          iconAreaAndPadding = 50 + 35 + 60; // icon area + padding + generous extra space
+        } else {
+          iconAreaAndPadding = 60 + 30 + 70; // icon area + padding + generous extra space
+        }
+        
+        const totalWidth = textWidth + iconAreaAndPadding;
+        
+        // Responsive minimum width
+        let minWidth = 300;
+        if (window.innerWidth <= 480) {
+          minWidth = 270; // Reduced for smaller screens
+        } else if (window.innerWidth <= 768) {
+          minWidth = 280; // Reduced for tablets
+        }
+        
+        // Maximum width constraints - more generous for longer text
+        let maxWidth = totalWidth;
+        if (window.innerWidth <= 480) {
+          maxWidth = Math.min(totalWidth, window.innerWidth - 20); // Very generous margins for mobile
+        } else if (window.innerWidth <= 768) {
+          maxWidth = Math.min(totalWidth, window.innerWidth - 40); // More generous for tablets
+        } else {
+          maxWidth = Math.min(totalWidth, 700); // Allow more width on desktop
+        }
+        
+        return Math.max(Math.min(maxWidth, totalWidth), minWidth);
+      }
       
       function animateLetters(text) {
-        // Simple fade transition without DOM manipulation
-        questionElement.textContent = text;
+        // Calculate and set the new width
+        const newWidth = measureTextWidth(text);
+        questionFlipContainer.style.width = newWidth + 'px';
+        
+        // Split text into letters and animate them
+        const letters = text.split('').map((letter, index) => {
+          return `<span class="letter" style="animation-delay: ${index * 0.02}s;">${letter === ' ' ? '&nbsp;' : letter}</span>`;
+        }).join('');
+        
+        questionTextContent.innerHTML = letters;
       }
       
       function changeQuestion() {
-        // Simple transition without width manipulation
         const nextQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+        const nextQuestion = questions[nextQuestionIndex];
         
-        // Fade out current question
-        questionElement.classList.add('fade-out');
-        
-        setTimeout(() => {
-          // Change to next question
-          currentQuestionIndex = nextQuestionIndex;
-          questionElement.classList.remove('fade-out');
-          
-          // Set new question text
-          animateLetters(questions[currentQuestionIndex]);
-        }, 300);
+        // Animate width change and letters
+        currentQuestionIndex = nextQuestionIndex;
+        animateLetters(nextQuestion);
       }
       
       // Simple instant scrolling to avoid scroll conflicts
@@ -238,23 +334,46 @@
         }
       }
 
-      // Simplified initialization - just show all content immediately
+      // Hybrid approach: immediate animations for most, scroll-triggered only for pricing
       document.addEventListener('DOMContentLoaded', function() {
-        // Skip intersection observer entirely and just show all animations
-        const animateElements = document.querySelectorAll('[class*="animate-on-scroll"]');
-        animateElements.forEach(el => el.classList.add('animate-in'));
+        // Show most animations immediately for smooth experience
+        const immediateAnimateElements = document.querySelectorAll('[class*="animate-on-scroll"]:not(.pricing-card)');
+        immediateAnimateElements.forEach(el => el.classList.add('animate-in'));
+        
+        // Use intersection observer ONLY for pricing card animation
+        const pricingCard = document.querySelector('.pricing-card.animate-on-scroll');
+        if (pricingCard) {
+          const simpleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                simpleObserver.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+          
+          simpleObserver.observe(pricingCard);
+        }
         
         // Also add animate-in to other elements that need it but don't have animate-on-scroll class
-        const otherAnimatedElements = document.querySelectorAll('.pricing-card, .contact-us-form-box, .footer-section, .showcase-text-box, .openai-gradient-box, .section-title-container, .pricing-header');
+        const otherAnimatedElements = document.querySelectorAll('.contact-us-form-box, .footer-section, .showcase-text-box, .openai-gradient-box, .section-title-container, .pricing-header');
         otherAnimatedElements.forEach(el => el.classList.add('animate-in'));
         
-        // Start the hero question animation
-        setTimeout(() => {
-          animateLetters(questions[0]);
-        }, 1000);
+        // Start the hero question animation immediately (no delay)
+        animateLetters(questions[0]);
         
-        // Change question every 4 seconds (slower for better performance)
-        setInterval(changeQuestion, 4000);
+        // Change question every 2.5 seconds for more engaging pace
+        setInterval(changeQuestion, 2500);
+        
+        // Handle window resize to recalculate widths (for mobile orientation changes)
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimeout);
+          resizeTimeout = setTimeout(() => {
+            // Recalculate width for current question
+            animateLetters(questions[currentQuestionIndex]);
+          }, 150);
+        });
       });
 
       // Hamburger menu functionality
